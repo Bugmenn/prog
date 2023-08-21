@@ -2,53 +2,85 @@
 <html lang="en">
 
 <head>
-    <title>Game panel</title>
-    <meta http-equiv="refresh" content="1">
+    <title>Listar jogador</title>
+    <meta charset="UTF-8" />
 </head>
 
 <body>
-    <div id="listagem">
 
+    <h1>jogador</h1>
+    <h4>Pessoa novamente com tabela bonita implementada via div</h4>
+
+    <!-- https://wisdmlabs.com/blog/responsive-tables-using-css-div-tag/ -->
+    <style>
+        #resp-table {
+            width: 100%;
+            display: table;
+        }
+
+        #resp-table-header {
+            display: table-header-group;
+            background-color: gray;
+            font-weight: bold;
+            font-size: 25px;
+        }
+
+        .table-header-cell {
+            display: table-cell;
+            padding: 10px;
+            text-align: justify;
+            border-bottom: 1px solid black;
+        }
+
+        #resp-table-body {
+            display: table-row-group;
+        }
+
+        .resp-table-row {
+            display: table-row;
+        }
+
+        .table-body-cell {
+            display: table-cell;
+        }
+    </style>
+
+    <div id="resp-table">
+        <div id="resp-table-header">
+            <div class="table-header-cell">id</div>
+            <div class="table-header-cell">Pontos</div>
+        </div>
+        <div id="resp-table-body">
+
+            <!--
+            <div class="resp-table-row">
+                <div class="table-body-cell">
+                    Cell 1–1
+                </div>
+            </div>
+            -->
+
+        </div>
     </div>
 
+    <h4>FIM</h4>
+    
+
+
     <!-- inclusão da biblioteca jquery -->
-    <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
+
+    <script src="java.js"></script>
 
     <script>
-        // chamada ao backend
-        var rota = 'http://localhost:5000/listar';
+        // proteção para não executar o javascript antes do documento estar pronto
+        $(function () {
 
-        // chamada ajax
-        var acao = $.ajax({
-            url: rota,
-            dataType: 'json', // os dados são recebidos no formato json,
+            // chamadas à função genérica
+            listagem_generica();
+
         });
-
-        // se a chamada der certo
-        acao.done(function (dados) {
-            if (dados.resultado == 'ok') {
-                // percorrer a lista de resultados
-                for (var p of dados.detalhes) {
-                    // acrescentar informações da pessoa em uma string
-                    var lin = '==> ' + 'Pontuação:' + p.pontos;
-                    // adiciona a string criada na div
-                    $('#listagem').append(lin);
-                }
-            } else {
-                alert("ERRO");
-            }
-        });
-
-        // se a chamada der erro
-        acao.fail(function () {
-            alert("Ocorreu algum erro na chamada ajax");
-        });
-
     </script>
 </body>
 
 </html>
-
-<!-- comando para servir páginas HTML: python3 -m http.server
-    abrir em: localhost:8000
--->
