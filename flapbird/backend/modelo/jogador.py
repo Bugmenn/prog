@@ -2,7 +2,7 @@ from backend.geral.config import *
 
 class Jogador(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    # posições do jogo
+    # pontos do jogador
     pontos = db.Column(db.Integer)
 
     def __str__(self):
