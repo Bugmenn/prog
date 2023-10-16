@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>Listagem</title>
+    <meta charset="UTF-8" />
+</head>
+
+<body>
+    <style>
+        a:hover {
+            background-color: yellow;
+        }
+    </style>
+
+    <!-- <a href="#todos">Listagem GERAL</a> |
+    <a href="#pagina1">Listagem (página 1)</a> |
+    <a href="#pagina2">Listagem (página 2)</a> -->
+
+    <hr>
+
+    <!-- <h4 id="todos">Usando DIV</h4> 
+    <div id="companias_em_div"></div> -->
+    <button id="avancar" class="btn btn-warning">Avançar</button>
+
+    <h4 id="pagina1">Com paginação: página <span id="np"></span></h4>
+    <div id="div_pagina_1"></div>
+
+    <!-- <h4 id="pagina2">Com paginação: página 2</h4>
+    <div id="div_pagina_2"></div> -->
+
+    <!-- outros tipos de listagem: com tabela e com div's formatadas -->
+
+    <!-- <h4>listagem com tabela</h4>
+    <style>
+        table,
+        th,
+        td {
+            border: 1px solid;
+        }
+    </style>
+    <table>
+        <thead>
+            <tr>
+                <th>id</th>
+                <th>código</th>
+                <th>data aquisição</th>
+                <th>data empréstimo</th>
+            </tr>
+        </thead>
+        <tbody id="corpo_tabela"></tbody>
+
+        </tbody>
+    </table> -->
+    
+    
+    
+
+
+    <!-- <h4>Pessoa novamente com tabela bonita implementada via div</h4> -->
+
+    <!-- https://wisdmlabs.com/blog/responsive-tables-using-css-div-tag/ -->
+    <!-- <style>
+        #resp-table {
+            width: 100%;
+            display: table;
+        }
+
+        #resp-table-header {
+            display: table-header-group;
+            background-color: gray;
+            font-weight: bold;
+            font-size: 25px;
+        }
+
+        .table-header-cell {
+            display: table-cell;
+            padding: 10px;
+            text-align: justify;
+            border-bottom: 1px solid black;
+        }
+        #resp-table-body {
+            display: table-row-group;
+        }
+        .resp-table-row {
+            display: table-row;
+        }
+        .table-body-cell {
+            display: table-cell;
+        }
+    </style>
+
+    <div id="table">
+        <div id="table-header">
+            <div class="table-header-cell">id</div>
+            <div class="table-header-cell">nome</div>
+            <div class="table-header-cell">email</div>
+            <div class="table-header-cell">telefone</div>
+        </div>
+        <div id="corpo_tabela_div">
+            <div class="resp-table-row">
+                <div class="table-body-cell">
+                    Cell 1–1
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <h4>FIM</h4> -->
+
+
+
+    <!-- inclusão da biblioteca jquery -->
+    <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
+
+    <script src="utils.js"></script>
+
+    <script>
+        // proteção para não executar o javascript antes do documento estar pronto
+        $(function () {
+            var pagina = 1;
+            // chamadas à função genérica
+            // nome_classe, nome_div, lista_campos, elemento_html, html_antes, html_depois
+            /* listagem_generica("Compania", "companias_em_div", ['id', 'nome', 'dominio', 'ano', 'industria',
+                'tamanho', 'localizacao', 'pais', 'linkedin', 'empregados_atual',
+                'empregados_total'], "<p>", "", "|"); */
+
+            // listagem com paginação
+            listagem_generica_paginada("Compania", "div_pagina_1", ['id', 'nome', 'dominio', 'ano', 'industria',
+                'tamanho', 'localizacao', 'pais', 'linkedin', 'empregados_atual',
+                'empregados_total'], "<p>", "", " | ", pagina);
+            /* listagem_generica_paginada("Compania", "div_pagina_2", ['id', 'nome', 'dominio', 'ano', 'industria',
+                'tamanho', 'localizacao', 'pais', 'linkedin', 'empregados_atual',
+                'empregados_total'], "<p>", "", " | ", 2); */
+            $('#np').text(pagina);
+
+
+            // respirador com tabela
+            //listagem_generica("Respirador", "respiradores", ['id', 'codigo', 'data_aquisicao', 'data_emprestimo', 'pessoa.nome'], "<tr>", "<td>", "</td>");
+
+            // pessoa novamente com tabela bonita implementada via divs
+            //listagem_generica("Pessoa", "resp-table-body", ['id', 'nome', 'email', 'telefone'], '<div class="resp-table-row">', '<div class="table-body-cell">', '</div>');
+            $(document).on("click", "#avancar", function () {
+                pagina += 1;
+                $('#div_pagina_1').empty();
+                listagem_generica_paginada("Compania", "div_pagina_1", ['id', 'nome', 'dominio', 'ano', 'industria',
+                'tamanho', 'localizacao', 'pais', 'linkedin', 'empregados_atual',
+                'empregados_total'], "<p>", "", " | ", pagina);
+            })
+        });
+    </script>
+</body>
+
+</html>
